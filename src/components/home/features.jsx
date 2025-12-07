@@ -3,7 +3,7 @@ import { MessageCircle, BarChart3, Users } from "lucide-react"
 
 export default function FeaturesSection() {
     return(
-        <section className="py-20 bg-white/50">
+        <section className="py-20">
             <div className="max-w-6xl mx-auto px-6">
                 <div className="text-center mb-16">
 

@@ -1,6 +1,5 @@
 
 import Button from '@/components/ui/Button';
-import Navbar from '@/components/layout/navbar';
 import Hero from '@/components/home/hero';
 import FeaturesSection from '@/components/home/features';
 import HIWSection from '@/components/home/howItworks';
@@ -10,7 +9,6 @@ export default function Home() {
     return (
         <div className="min-h-screen overflow-x-hidden">
             
-            <Navbar />
             <Hero />
             <FeaturesSection />
             <HIWSection />

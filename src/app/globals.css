@@ -2,6 +2,7 @@
 
 body{
     font-family: 'Patrick Hand', cursive;
+    background: #fff5e4;
 }
 
 .sketchy-border {
@@ -12,7 +13,6 @@ body{
 
 .sketchy-border:hover {
     border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px;
-    transform: scale(1);
 }
 
 .sketchy-box {
