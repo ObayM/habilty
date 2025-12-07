@@ -1,5 +1,6 @@
 'use client';
 import HabitList from "@/components/dashboard/HabitList";
+import ConnectSlack from "@/components/dashboard/ConnectSlack";
 
 export default function Dashboard() {
 
@@ -16,6 +17,7 @@ export default function Dashboard() {
                 </header>
 
                 <main>
+                    <ConnectSlack />
                     <HabitList />
                 </main>
 

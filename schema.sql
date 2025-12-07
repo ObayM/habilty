@@ -85,3 +85,22 @@ create policy "Users can delete their own habit logs." on habit_logs
       and habits.user_id = auth.uid()
     )
   );
+
+-- working on the slack bot
+alter table profiles add column slack_user_id text unique;
+
+create table connect_codes_slack (
+  code text primary key,
+  user_id uuid references auth.users on delete cascade not null,
+  expires_at timestamp with time zone not null,
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+
+);
+
+alter table connect_codes_slack enable row level security;
+
+create policy "Users can view their own connect codes." on connect_codes_slack
+  for select using (auth.uid() = user_id);
+
+create policy "Users can create their own connect codes." on connect_codes_slack
+  for insert with check (auth.uid() = user_id);
