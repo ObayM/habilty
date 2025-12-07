@@ -1,0 +1,26 @@
+'use client';
+import { useAuth } from "@/components/auth/AuthProvider"
+
+export default function Dashboard() {
+    const {user} = useAuth()
+
+    return (
+        <div className="min-h-[calc(100vh-104px)] p-4 sm:p-8">
+            <div className="max-w-4xl mx-auto">
+                <header className="mb-8 flex items-center justify-between">
+                    <div>
+                        <h1 className="text-4xl text-neutral-800 mb-2">My habits!</h1>
+                        <p className="text-gray-500 text-lg">One Step at a time!</p>
+                    </div>
+                    
+                </header>
+
+                <main>
+
+
+                </main>
+
+            </div>
+        </div>
+    )
+}
