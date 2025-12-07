@@ -1,8 +1,8 @@
 'use client';
-import { useAuth } from "@/components/auth/AuthProvider"
+import HabitList from "@/components/dashboard/HabitList";
 
 export default function Dashboard() {
-    const {user} = useAuth()
+
 
     return (
         <div className="min-h-[calc(100vh-104px)] p-4 sm:p-8">
@@ -16,8 +16,7 @@ export default function Dashboard() {
                 </header>
 
                 <main>
-
-
+                    <HabitList />
                 </main>
 
             </div>
