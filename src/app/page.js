@@ -3,6 +3,7 @@ import Button from '@/components/ui/Button';
 import Hero from '@/components/home/hero';
 import FeaturesSection from '@/components/home/features';
 import HIWSection from '@/components/home/howItworks';
+import Link from "next/link";
 
 export default function Home() {
 
@@ -19,7 +20,7 @@ export default function Home() {
                     
                     <div className="flex justify-center">
                         <Button primary className="text-2xl px-8 py-4">
-                            Get Started!
+                            <Link href={'/dashboard'}>Get Started!</Link>
                         </Button>
                     </div>
                 </div>

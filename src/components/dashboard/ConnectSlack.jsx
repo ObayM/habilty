@@ -50,7 +50,7 @@ export default function ConnectSlack() {
             </div>
 
             <p className="text-gray-600 mb-4">
-                Get daily reminders and log habits directly from Slack!
+                Get daily reminders and log habits directly from Slack, only works in HackClub slack for now!
             </p>
 
             {!code ? (

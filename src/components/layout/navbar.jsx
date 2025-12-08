@@ -7,15 +7,14 @@ export default function Navbar() {
             <div className="flex justify-between items-center p-6 max-w-6xl mx-auto">
                 
                 <div className="text-3xl tracking-tighter flex items-center gap-2">
-                    Habilty
+                    <Link href={'/'}>Habilty</Link>
                 </div>
                 
                 <div className="hidden md:flex gap-6 text-xl items-center">
                     <Link href="/dashboard" className="hover:text-[#ff7e5f] transition-colors">Dashboard</Link>
-                    <Link href="/habits" className="hover:text-[#ff7e5f] transition-colors">Your Habits</Link>
                 </div>
 
-                <Button primary="true" >Get Started</Button>
+                <Button primary="true" ><Link href={'/login'}>Get Started</Link></Button>
             </div>
     );
 }

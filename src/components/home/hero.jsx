@@ -1,5 +1,6 @@
 import Button from "../ui/Button"
 import { Sparkles, Pencil, ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 export default function Hero() {
     return(
@@ -27,7 +28,7 @@ export default function Hero() {
                 <div className="flex flex-col sm:flex-row gap-4">
 
                     <Button primary>
-                        Start Tracking now! <ArrowRight size={20} />
+                        <Link className="m-0 p-0" href="/dashboard">Start Tracking now!</Link>
                     </Button>
 
                 </div>
