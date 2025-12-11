@@ -69,7 +69,7 @@ export default function OnboardingForm() {
       console.error("Availability check failed:", e);
 
       setIsAvailable(null);
-      setError("Could not check username availability. Please try again.");
+      setError("Could not check username availability. Please reload the page and try again!");
     } finally {
       setIsChecking(false);
     }
