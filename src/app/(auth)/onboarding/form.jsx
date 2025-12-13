@@ -38,51 +38,43 @@ export default function OnboardingForm() {
 
   const debouncedUsername = useDebounce(username, 500);
   const router = useRouter();
-  const supabase = createClient();
+
 
   const checkAvailability = useCallback(async (name) => {
+
     if (!USERNAME_REGEX.test(name)) {
-      setIsChecking(false);
       setIsAvailable(false);
       return;
     }
+    
     setIsChecking(true);
+    setError(null);
+
     try {
 
-      const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error("Request timed out :(")), 5000)
-      );
+      const res = await fetch(`/api/onboarding?username=${name}`);
+      if (!res.ok) throw new Error("Check failed");
 
-      const checkPromise = supabase
-        .from("profiles")
-        .select("id")
-        .eq("username", name)
-        .maybeSingle();
+      const data = await res.json();
+      setIsAvailable(data.isAvailable);
 
-      const { data, error } = await Promise.race([checkPromise, timeoutPromise]);
-
-      if (error) throw error;
-
-      setIsAvailable(!data);
     } catch (e) {
-
-      console.error("Availability check failed:", e);
-
+      console.error(e);
       setIsAvailable(null);
-      setError("Could not check username availability. Please reload the page and try again!");
+
     } finally {
       setIsChecking(false);
     }
-  }, [supabase]);
+  }, []);
 
   useEffect(() => {
     const name = debouncedUsername.trim().toLowerCase();
-    if (name) {
-      checkAvailability(name);
-    } else {
-      setIsAvailable(null);
-    }
+
+    if (name) checkAvailability(name);
+
+    else setIsAvailable(null);
   }, [debouncedUsername, checkAvailability]);
+
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -90,30 +82,31 @@ export default function OnboardingForm() {
 
     const candidate = username.trim().toLowerCase();
 
-    if (!isAvailable) {
-      setError("This username is unavailable or invalid. Please choose another.");
-      return;
-    }
-
-    if (!user) {
-      setError("User not found. Please log in again.");
-      return;
-    }
+    if (!isAvailable) return setError("Username unavailable.");
+    if (!user) return setError("Please log in.");
 
     setLoading(true);
 
     try {
-      const { error: insertError } = await supabase
-        .from("profiles")
-        .insert({ id: user.id, username: candidate });
 
-      if (insertError) throw new Error(insertError.message);
+      const res = await fetch("/api/onboarding", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: candidate }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Submission failed");
+      }
+
 
       router.push("/dashboard");
       router.refresh();
+      
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "An unknown error occurred.";
-      setError(errorMessage);
+      setError(err.message);
     } finally {
       setLoading(false);
     }

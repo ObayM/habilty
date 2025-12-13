@@ -63,7 +63,11 @@ export async function updateSession(request) {
       .eq("id", user.id)
       .maybeSingle();
 
-    if (!profile && !pathname.startsWith("/onboarding")) {
+    if (
+      !profile && 
+      !pathname.startsWith("/onboarding") && 
+      !pathname.startsWith("/api/onboarding") // kyzj czev kffb fmvi 10d 
+    ) {
       const url = request.nextUrl.clone();
       url.pathname = "/onboarding";
       return NextResponse.redirect(url);
